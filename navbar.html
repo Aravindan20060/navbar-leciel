@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Ciel - College Event</title>
+    <!-- Import the 'Creepster' font from Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Creepster&display=swap">
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            overflow-x: hidden;
+            transition: background-color 0.3s;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(51, 51, 51, 0.7); /* Translucent background */
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.3s;
+        }
+
+        .navbar.scrolled {
+            background-color: rgba(51, 51, 51, 0.9);
+        }
+
+        /* Le Ciel text styles */
+        .logo {
+            font-family: 'Creepster', cursive; /* Creepy font */
+            font-size: 2rem;
+            color: rgba(255, 255, 255, 0.7); /* Translucent */
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.1); /* Zoom effect */
+            color: #ffffff; /* Solid white on hover */
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            font-size: 2rem;
+            color: white;
+            cursor: pointer;
+            z-index: 1100; /* Ensure it's above other content */
+        }
+
+        /* Navigation Links */
+        .nav-links {
+            list-style: none;
+            display: flex;
+            justify-content: flex-end;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-links li {
+            margin-left: 1.5rem;
+            position: relative;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.7); /* Translucent color */
+            padding: 1rem 1.5rem;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            transition: color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1); /* Light translucent background for tile effect */
+            position: relative;
+            overflow: hidden; /* Hide overflow to avoid showing edges */
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 120%; /* Larger size to cover without excess */
+            height: 120%; /* Larger size to cover without excess */
+            background: rgba(255, 255, 255, 0.2); /* Light translucent tile effect */
+            z-index: -1;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            transform: translate(-50%, -50%) scale(0.8);
+            opacity: 0;
+            border-radius: 8px; /* Matches the border radius of the link */
+        }
+
+        .nav-links a:hover::before {
+            transform: translate(-50%, -50%) scale(1); /* Expand the tile effect */
+            opacity: 1;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff; /* Turns white on hover */
+            background-color: rgba(0, 0, 0, 0.3); /* Darker background on hover */
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.7); /* Smooth glowing effect */
+        }
+
+        /* Responsive for smaller screens */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links {
+                display: none; /* Hidden by default */
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                right: 0;
+                width: 100%;
+                background-color: rgba(51, 51, 51, 0.9); /* Darker background */
+                border-radius: 8px;
+                z-index: 1000;
+            }
+
+            .nav-links li {
+                margin: 0;
+            }
+
+            .nav-links a {
+                padding: 1rem;
+                text-align: center;
+                width: 100%;
+                border-radius: 0; /* Remove border-radius on mobile for a seamless look */
+            }
+
+            #checkbox_toggle:checked ~ .nav-links {
+                display: flex;
+            }
+        }
+
+        #checkbox_toggle {
+            display: none;
+        }
+
+        /* Scroll Detection for Navbar */
+        .navbar.scrolled {
+            background-color: rgba(51, 51, 51, 0.9);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <!-- Left-aligned Le Ciel logo -->
+        <div class="logo">Le Ciel</div>
+
+        <!-- Hamburger Menu -->
+        <input type="checkbox" id="checkbox_toggle">
+        <label for="checkbox_toggle" class="hamburger">&#9776;</label>
+
+        <!-- Right-aligned navigation links -->
+        <ul class="menu nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Events</a></li>
+            <li><a href="#">Gallery</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <script>
+        // Scroll Detection for Navbar
+        const navbar = document.querySelector('.navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
